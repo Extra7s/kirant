@@ -9,14 +9,34 @@ export default function FloorPlanMenu({ onClose }: { onClose: () => void }) {
   const pathRef = useRef<SVGPathElement>(null)
   const infoRef = useRef<HTMLDivElement>(null)
 
+  const navigateToSection = (href: string) => {
+    const sectionId = href.replace('/', '') || 'home'
+    const section = document.getElementById(sectionId)
+
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.history.pushState({}, '', href)
+    } else {
+      window.location.assign(href)
+    }
+  }
+
   useEffect(() => {
     if (!pathRef.current) return
 
+    const path = pathRef.current
+    const length = path.getTotalLength()
+
     gsap.fromTo(
-      pathRef.current,
-      { pathLength: 0, opacity: 0.2 },
+      path,
       {
-        pathLength: 1,
+        strokeDasharray: length,
+        strokeDashoffset: length,
+        opacity: 0.2,
+      },
+      {
+        strokeDasharray: length,
+        strokeDashoffset: 0,
         opacity: 0.4,
         duration: 2,
         ease: 'power2.inOut',
@@ -85,6 +105,7 @@ export default function FloorPlanMenu({ onClose }: { onClose: () => void }) {
                 onMouseLeave={() => setHovered(null)}
                 onClick={(event) => {
                   event.stopPropagation()
+                  navigateToSection(room.href)
                   onClose()
                 }}
                 className="cursor-pointer group"

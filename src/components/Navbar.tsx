@@ -70,29 +70,35 @@ export default function Navbar() {
   }, [hidden])
 
   useEffect(() => {
+    if (!backdropRef.current || !panelRef.current) return
+
+    const backdrop = backdropRef.current
+    const panel = panelRef.current
+
     if (menuOpen) {
       document.body.style.overflow = 'hidden'
-      gsap.to(backdropRef.current, {
+      gsap.set(panel, { xPercent: 100, autoAlpha: 0 })
+      gsap.to(backdrop, {
         autoAlpha: 1,
         duration: 0.3,
         ease: 'power2.out',
       })
-      gsap.to(panelRef.current, {
+      gsap.to(panel, {
         xPercent: 0,
-        opacity: 1,
+        autoAlpha: 1,
         duration: 0.55,
         ease: 'power3.out',
       })
     } else {
       document.body.style.overflow = ''
-      gsap.to(backdropRef.current, {
+      gsap.to(backdrop, {
         autoAlpha: 0,
         duration: 0.3,
         ease: 'power2.out',
       })
-      gsap.to(panelRef.current, {
+      gsap.to(panel, {
         xPercent: 100,
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.45,
         ease: 'power3.in',
       })
@@ -178,12 +184,12 @@ export default function Navbar() {
           <div
             ref={backdropRef}
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-190 bg-black/10 cursor-pointer opacity-0"
+            className="fixed inset-0 z-190 bg-black/10 cursor-pointer"
             aria-hidden="true"
           />
           <div
             ref={panelRef}
-            className="fixed inset-0 z-200 bg-black flex flex-col items-center justify-center p-8 shadow-2xl opacity-0 translate-x-full"
+            className="fixed inset-0 z-200 bg-black flex flex-col items-center justify-center p-8 shadow-2xl"
           >
             <FloorPlanMenu onClose={() => setMenuOpen(false)} />
           </div>

@@ -22,15 +22,17 @@ function Home() {
       <Navbar />
       <ScrollIndicator hidden={loading} />
 
-      <div className="relative z-10 bg-background">
+      <div id="home" className="relative z-10 bg-background">
         <Hero />
-        <div className="bg-black">
+        <div id="room" className="bg-black">
           <IntroText />
           <RoomShowcase />
         </div>
-        <AboutSection />
+        <div id="about">
+          <AboutSection />
+        </div>
         <StatsSection />
-        <div className="h-dvh relative">
+        <div id="wellness" className="h-dvh relative">
           <div className="relative w-full h-full">
             <img
               src="/images/wellness/meditation-1.webp"
@@ -40,12 +42,20 @@ function Home() {
             <div className="absolute inset-0 z-10 bg-black/30" />
           </div>
         </div>
-        <DiningSection />
-        <ReelsSection />
-        <ReviewsSection />
+        <div id="dining">
+          <DiningSection />
+        </div>
+        <div id="gallery">
+          <ReelsSection />
+        </div>
+        <div id="history">
+          <ReviewsSection />
+        </div>
       </div>
 
-      <Footer />
+      <div id="contact">
+        <Footer />
+      </div>
     </>
   )
 }
