@@ -1,0 +1,11 @@
+
+> kirant-react@0.0.0 build
+> tsc -b && vite build ; type build.out; echo EXIT:$?
+
+src/components/FloorPlanMenu.tsx(81,40): error TS6133: 'index' is declared but its value is never read.
+src/components/ReelsSection.tsx(106,19): error TS6133: 'visible' is declared but its value is never read.
+src/components/RoomShowcase.tsx(13,13): error TS2345: Argument of type '() => () => gsap.core.Timeline' is not assignable to parameter of type 'EffectCallback'.
+  Type '() => gsap.core.Timeline' is not assignable to type 'void | Destructor'.
+    Type '() => gsap.core.Timeline' is not assignable to type 'Destructor'.
+      Type 'Timeline' is not assignable to type 'void | { [UNDEFINED_VOID_ONLY]: never; }'.
+src/components/StatsSection.tsx(42,29): error TS6133: 'index' is declared but its value is never read.
